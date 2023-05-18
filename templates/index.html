@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+
+        <title>팀 당근</title>
+
+        <link
+            href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --font-size-title: 32px;
+                --line-height-title: 1.4;
+                --font-size-caption: 14px;
+                --line-height-caption: 1.2;
+                --color-text: #222022;
+                --color-highlight-primary: #ffef7e;
+                --color-highlight-secondary: #b7f9e9;
+                --border-radius-primary: 32px;
+            }
+
+            * {
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+
+            * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .mytitle {
+                width: 100%;
+                height: 250px;
+
+                background-image: linear-gradient(
+                        0deg,
+                        rgba(0, 0, 0, 0.5),
+                        rgba(0, 0, 0, 0.5)
+                    ),
+                    url('https://mblogthumb-phinf.pstatic.net/MjAyMzAxMDhfMTMx/MDAxNjczMTcxNzAxMzU2.1JKOyRsEc3U4PqGCXhXj3eF1UNk2a92aoujWgk0bWGUg.nnasCWHkHmNNFgVGkGcupTtuc2rFaXUWKzkwM4G18SAg.JPEG.12strabbit/IMG_8317.JPG?type=w800');
+                background-position: center 30%;
+                background-size: contain;
+
+                color: white;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .team_container {
+                margin: 10px auto;
+                max-width: 1200px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .team_introduction {
+                max-width: 1200px;
+                border-radius: var(--border-radius-primary);
+                box-shadow: 24px 24px 80px rgba(0, 0, 0, 0.1);
+                padding: 20px 20px 28px 20px;
+                box-sizing: border-box;
+                margin: 20px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            @media (min-width: 576px) {
+                .team_introduction {
+                    flex-direction: row;
+                    align-items: center;
+                    margin: 40px;
+                    padding: 32px;
+                }
+            }
+
+            .team_image {
+                width: 300px;
+                max-height: 300px;
+                border-radius: var(--border-radius-primary);
+                -o-object-fit: cover;
+                object-fit: cover;
+                margin-bottom: 18px;
+            }
+
+            @media (min-width: 576px) {
+                .team_image {
+                    max-height: none;
+                    min-height: 400px;
+                    margin-bottom: 0;
+                }
+            }
+
+            @media (min-width: 576px) {
+                .team_comment {
+                    width: 55%;
+                    padding-left: 40px;
+                }
+            }
+
+            .comment {
+                font-family: var(--font-family-primary);
+                font-size: var(--font-size-title);
+                line-height: var(--line-height-title);
+                color: var(--color-text);
+                -webkit-box-decoration-break: clone;
+                box-decoration-break: clone;
+                background-image: linear-gradient(
+                    90deg,
+                    var(--color-highlight-primary),
+                    var(--color-highlight-secondary)
+                );
+                background-size: 100% 42%;
+                background-repeat: no-repeat;
+                background-position: 0 85%;
+                padding: 0 4px;
+                margin-left: -4px;
+            }
+
+            .add_member {
+                width: 400px;
+            }
+
+            #name {
+                margin-top: 20px;
+            }
+
+            .add_member > #add_btn {
+                padding: 15px 0px 10px 0px;
+            }
+
+            .mycards {
+                margin: 20px auto 0px auto;
+                width: 95%;
+                max-width: 1200px;
+            }
+
+            .card-img-top {
+                height: 300px;
+                border-radius: 8px;
+            }
+
+            .member-name {
+                text-align: center;
+            }
+        </style>
+        <script>
+            function save_members() {
+                let name = $('#inputName').val();
+                let image = $('#inputImage').val();
+                let blog = $('#inputEmail').val();
+                let comment = $('#inputDetermination').val();
+                let hobby = $('#inputHobby').val();
+                let formData = new FormData();
+                formData.append('name_give', name);
+                formData.append('image_give', image);
+                formData.append('blog_give', blog);
+                formData.append('comment_give', comment);
+                formData.append('hobby_give', hobby);
+
+                fetch('/members', { method: 'POST', body: formData })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        alert(data['msg']);
+                        window.location.reload();
+                    });
+            }
+
+            function deletemember(name) {
+                fetch('/members/memberid', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name_give: name }),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        alert(data['msg']);
+                        window.location.reload();
+                    });
+            }
+
+            function listing() {
+                fetch('/members')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        let rows = data['result'];
+                        $('#cards-box').empty();
+                        rows.forEach((a) => {
+                            let name = a['name'];
+                            let image = a['image'];
+                            let blog = a['blog'];
+                            let comment = a['comment'];
+
+                            let temp_html = `<div class="col">
+                                                <div class="card h-100">
+                                                    <a href='/subpage'>
+                                                    <img src="${image}" class="card-img-top" />
+                                                    </a>
+                                                    <div class="member-body">
+                                                        <h5 class="member-name">${name}</h5>
+                                                        <button onclick="deletemember('${name}')" type="button" class="btn btn-dark">삭제하기</button>
+                                                    </div>
+                                                </div>
+                                            </div>`;
+                            $('#cards-box').append(temp_html);
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+
+            $(document).ready(function () {
+                listing();
+            });
+        </script>
+    </head>
+
+    <body>
+        <div class="mytitle">
+            <h1>🥕 TEAM_CARROT 🥕</h1>
+        </div>
+        <div class="team_container">
+            <div class="team_introduction">
+                <div class="team_image">
+                    <img
+                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbghKrc%2Fbtr2wuMtApY%2FfEC5CTnFqyE5k5ECn38xE1%2Fimg.png"
+                        class="team_image"
+                        alt="brown couch"
+                    />
+                </div>
+                <div class="team_comment">
+                    <span class="comment">
+                        저희는 각자의 의견을<br />
+                        존중하고,적극적으로 반영하여<br />
+                        프로젝트를 진행합니다.<br />
+                        그리고, 머리가 아플때는<br />
+                        당근을 흔듭니다!<br />
+                        (🥕흔들흔들)
+                    </span>
+                </div>
+                <form class="add_member">
+                    <div id="name">
+                        <label for="inputName" class="form-label"></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputName"
+                            placeholder="성함을 입력해주세요"
+                        />
+                    </div>
+                    <div id="blogUrl">
+                        <label for="inputEmail" class="form-label"></label>
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="inputEmail"
+                            placeholder="블로그 URL을 입력해주세요"
+                        />
+                    </div>
+                    <div id="imageUrl">
+                        <label for="inputImage" class="form-label"></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputImage"
+                            placeholder="프로필로 사용하실 이미지의 URL을 입력해주세요"
+                        />
+                    </div>
+                    <div id="hobby">
+                        <label for="inputHobby" class="form-label"></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputHobby"
+                            placeholder="취미를 입력해주세요"
+                        />
+                    </div>
+                    <div id="determination">
+                        <label
+                            for="inputDetermination"
+                            class="form-label"
+                        ></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputDetermination"
+                            placeholder="하고 싶은 한마디를 입력해주세요"
+                        />
+                    </div>
+                    <div id="add_btn">
+                        <button
+                            type="button"
+                            class="btn btn-dark"
+                            onclick="save_members()"
+                        >
+                            멤버 추가
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="mycards">
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
+                <div class="col">
+                    <div class="card h-100">
+                        <a href="/subpage">
+                            <img src="${image}" class="card-img-top" />
+                        </a>
+                        <div class="member-body">
+                            <h5 class="member-name">이름이 들어갑니다</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
