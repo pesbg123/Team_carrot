@@ -54,7 +54,7 @@ def member_get():
     return jsonify({'result': all_members})
 
 
-@app.route('/members/memberid', methods=['POST'])
+@app.route('/members/memberid', methods=['DELETE'])
 def delete_member():
     data = request.json
     name_receive = data['name_give']
@@ -62,17 +62,17 @@ def delete_member():
     return jsonify({'msg': '삭제 완료!'})
 
 
-@app.route("/subpage/comment", methods=["GET"])
-def comments_show():
-    all_commnets = list(db.comments.find({}, {'_id': False}).sort('_id', -1))
+@app.route("/members/<id>/comments", methods=["GET"])
+def comments_show(id):
+    all_commnets = list(db.comments.find(
+        {'memberid': id}, {'_id': False}).sort('_id', -1))
     return jsonify({'result': all_commnets})
 
 # id구현함
 
 
-@app.route("/subpage/commentid", methods=["POST"])
-def comments_post():
-    id_receive = int(request.form.get('id_give'))
+@app.route("/members/<id>/comments", methods=["POST"])
+def comments_post(id):
     nickname_receive = request.form.get('nickname_give')
     comment_receive = request.form.get('comment_give')
 
@@ -86,7 +86,7 @@ def comments_post():
         comment_id = last_comment['comment_id'] + 1
 
     doc2 = {
-        'id': id_receive,
+        'memberid': id,
         'comment_id': comment_id,
         'nickname': nickname_receive,
         'comment': comment_receive
@@ -106,9 +106,11 @@ def delete_comment():
 @app.route('/members/<id>')
 def render_teammember(id):
     _id = int(id)
+    print(_id)
     member = db.members.find_one({'member_id': _id})
+    print(member)
     return render_template('member.html', member=member)
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5001, debug=True)
+    app.run('0.0.0.0', port=5002, debug=True)
