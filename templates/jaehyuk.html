@@ -176,7 +176,6 @@
                 fetch('/subpage/comment')
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
                         let rows = data['result'];
                         $('#comment-list').empty();
                         rows.forEach((a) => {
