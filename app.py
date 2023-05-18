@@ -31,13 +31,13 @@ def members_post():
         id = 1
     else:
         last_member = all_members[-1]
-        if 'id' in last_member:
-            id = last_member['id'] + 1
+        if 'member_id' in last_member:
+            id = last_member['member_id'] + 1
         else:
             id = 1
 
     doc = {
-        'id': id,
+        'member_id': id,
         'name': name_receive,
         'image': image_receive,
         'blog': blog_receive,
@@ -60,16 +60,6 @@ def delete_member():
     name_receive = data['name_give']
     db.members.delete_one({'name': name_receive})
     return jsonify({'msg': '삭제 완료!'})
-
-
-@app.route('/siho')
-def member():
-    return render_template('siho.html')
-
-
-@app.route('/jaehyuck')
-def member2():
-    return render_template('jaehyuck.html')
 
 
 @app.route("/subpage/comment", methods=["GET"])
@@ -111,6 +101,14 @@ def delete_comment():
     comments_receive = data['comment_give']
     db.comments.delete_one({'nickname': comments_receive})
     return jsonify({'msg': '삭제완료!'})
+
+
+@app.route('/members/<id>')
+def render_teammember(id):
+    _id = int(id)
+    member = db.members.find_one({'member_id': _id})
+    print(member)
+    return render_template('member.html', member=member)
 
 
 if __name__ == '__main__':
