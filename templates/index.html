@@ -190,7 +190,7 @@
 
             function deletemember(name) {
                 fetch('/members/memberid', {
-                    method: 'POST',
+                    method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -208,21 +208,27 @@
                     .then((res) => res.json())
                     .then((data) => {
                         let rows = data['result'];
-                        $('#cards-box').empty();
                         rows.forEach((a) => {
                             let name = a['name'];
+                            let id = a['member_id'];
                             let image = a['image'];
-                            let blog = a['blog'];
-                            let comment = a['comment'];
-
                             let temp_html = `<div class="col">
                                                 <div class="card h-100">
-                                                    <a href='/subpage'>
-                                                    <img src="${image}" class="card-img-top" />
+                                                    <a href="/members/${id}">
+                                                        <img
+                                                            src="${image}"
+                                                            class="card-img-top"
+                                                        />
                                                     </a>
                                                     <div class="member-body">
                                                         <h5 class="member-name">${name}</h5>
-                                                        <button onclick="deletemember('${name}')" type="button" class="btn btn-dark">삭제하기</button>
+                                                        <button
+                                                            onclick="deletemember('${name}')"
+                                                            type="button"
+                                                            class="btn btn-dark"
+                                                        >
+                                                            삭제하기
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>`;
@@ -325,18 +331,7 @@
             </div>
         </div>
         <div class="mycards">
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
-                <div class="col">
-                    <div class="card h-100">
-                        <a href="/subpage">
-                            <img src="${image}" class="card-img-top" />
-                        </a>
-                        <div class="member-body">
-                            <h5 class="member-name">이름이 들어갑니다</h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
         </div>
     </body>
 </html>
