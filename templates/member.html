@@ -206,32 +206,20 @@
             <div class="team_introduction">
                 <div class="team_image">
                     <img
-                        src="https://devjeans-photo.s3.amazonaws.com/2023-05-17T23:50:53.789442bunny.jpg"
+                        src="{{member.image}}"
                         class="team_image"
                         alt="brown couch"
                     />
                 </div>
                 <div class="team_comment">
-                    <h1>윤시호</h1>
+                    <h1>Name : {{member.name}}</h1>
                     <br />
                     <br />
-                    <p>Age : 28</p>
+                    <p>hobby : {{member.hobby}}</p>
                     <br />
-                    <p>Tmi : 당근 맛없어요</p>
+                    <p>Tmi : {{member.comment}}</p>
                     <br />
-                    <p>Favorite : 코딩(희망)</p>
-                    <br />
-                    <p>
-                        Comment : 안녕하세요 html, css <br />
-                        데이터 조회를 담당했습니다
-                    </p>
-                    <br />
-                    <p>
-                        Blog url :
-                        <a href="https://velog.io/@siho9875"
-                            >https://velog.io/@siho9875</a
-                        >
-                    </p>
+                    <p>Blog url : {{member.blog}}</p>
                 </div>
             </div>
         </div>
