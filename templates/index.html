@@ -208,25 +208,15 @@
                     .then((res) => res.json())
                     .then((data) => {
                         let rows = data['result'];
-                        $('#cards-box').empty();
+                        $('#member-body').empty();
                         rows.forEach((a) => {
                             let name = a['name'];
-                            let image = a['image'];
-                            let blog = a['blog'];
-                            let comment = a['comment'];
 
-                            let temp_html = `<div class="col">
-                                                <div class="card h-100">
-                                                    <a href='/subpage'>
-                                                    <img src="${image}" class="card-img-top" />
-                                                    </a>
-                                                    <div class="member-body">
-                                                        <h5 class="member-name">${name}</h5>
-                                                        <button onclick="deletemember('${name}')" type="button" class="btn btn-dark">삭제하기</button>
-                                                    </div>
-                                                </div>
+                            let temp_html = `<div class="member-body">
+                                                    <h5 class="member-name">${name}</h5>
+                                                    <button onclick="deletemember('${name}')" type="button" class="btn btn-dark">삭제하기</button>
                                             </div>`;
-                            $('#cards-box').append(temp_html);
+                            $('#member-body').append(temp_html);
                         });
                     })
                     .catch((error) => {
@@ -328,11 +318,21 @@
             <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box">
                 <div class="col">
                     <div class="card h-100">
-                        <a href="/subpage">
-                            <img src="${image}" class="card-img-top" />
+                        <a href="/siho">
+                            <img
+                                src="https://devjeans-photo.s3.amazonaws.com/2023-05-17T23:50:53.789442bunny.jpg"
+                                class="card-img-top"
+                            />
                         </a>
                         <div class="member-body">
                             <h5 class="member-name">이름이 들어갑니다</h5>
+                            <button
+                                onclick="deletemember('${name}')"
+                                type="button"
+                                class="btn btn-dark"
+                            >
+                                삭제하기
+                            </button>
                         </div>
                     </div>
                 </div>
