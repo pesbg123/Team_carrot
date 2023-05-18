@@ -188,16 +188,16 @@
                 });
         }
 
-            function listing() {
-                fetch('/members')
-                    .then((res) => res.json())
-                    .then((data) => {
-                        let rows = data['result'];
-                        rows.forEach((a) => {
-                            let name = a['name'];
-                            let id = a['member_id'];
-                            let image = a['image'];
-                            let temp_html = `<div class="col">
+        function listing() {
+            fetch('/members')
+                .then((res) => res.json())
+                .then((data) => {
+                    let rows = data['result'];
+                    rows.forEach((a) => {
+                        let name = a['name'];
+                        let id = a['member_id'];
+                        let image = a['image'];
+                        let temp_html = `<div class="col">
                                                 <div class="card h-100">
                                                     <a href="/members/${id}">
                                                         <img
@@ -217,13 +217,13 @@
                                                     </div>
                                                 </div>
                                             </div>`;
-                            $('#cards-box').append(temp_html);
-                        });
-                    })
-                    .catch((error) => {
-                        console.log(error);
+                        $('#cards-box').append(temp_html);
                     });
-            }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
 
         $(document).ready(function () {
             listing();
@@ -231,92 +231,58 @@
     </script>
 </head>
 
-    <body>
-        <div class="mytitle">
-            <h1>🥕 TEAM_CARROT 🥕</h1>
-        </div>
-        <div class="team_container">
-            <div class="team_introduction">
-                <div class="team_image">
-                    <img
-                        src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbghKrc%2Fbtr2wuMtApY%2FfEC5CTnFqyE5k5ECn38xE1%2Fimg.png"
-                        class="team_image"
-                        alt="brown couch"
-                    />
-                </div>
-                <div class="team_comment">
-                    <span class="comment">
-                        저희는 각자의 의견을<br />
-                        존중하고,적극적으로 반영하여<br />
-                        프로젝트를 진행합니다.<br />
-                        그리고, 머리가 아플때는<br />
-                        당근을 흔듭니다!<br />
-                        (🥕흔들흔들)
-                    </span>
-                </div>
-                <form class="add_member">
-                    <div id="name">
-                        <label for="inputName" class="form-label"></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputName"
-                            placeholder="성함을 입력해주세요"
-                        />
-                    </div>
-                    <div id="blogUrl">
-                        <label for="inputEmail" class="form-label"></label>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="inputEmail"
-                            placeholder="블로그 URL을 입력해주세요"
-                        />
-                    </div>
-                    <div id="imageUrl">
-                        <label for="inputImage" class="form-label"></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputImage"
-                            placeholder="프로필로 사용하실 이미지의 URL을 입력해주세요"
-                        />
-                    </div>
-                    <div id="hobby">
-                        <label for="inputHobby" class="form-label"></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputHobby"
-                            placeholder="취미를 입력해주세요"
-                        />
-                    </div>
-                    <div id="determination">
-                        <label
-                            for="inputDetermination"
-                            class="form-label"
-                        ></label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputDetermination"
-                            placeholder="하고 싶은 한마디를 입력해주세요"
-                        />
-                    </div>
-                    <div id="add_btn">
-                        <button
-                            type="button"
-                            class="btn btn-dark"
-                            onclick="save_members()"
-                        >
-                            멤버 추가
-                        </button>
-                    </div>
-                </form>
+<body>
+    <div class="mytitle">
+        <h1>🥕 TEAM_CARROT 🥕</h1>
+    </div>
+    <div class="team_container">
+        <div class="team_introduction">
+            <div class="team_image">
+                <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbghKrc%2Fbtr2wuMtApY%2FfEC5CTnFqyE5k5ECn38xE1%2Fimg.png"
+                    class="team_image" alt="brown couch" />
             </div>
+            <div class="team_comment">
+                <span class="comment">
+                    저희는 각자의 의견을<br />
+                    존중하고,적극적으로 반영하여<br />
+                    프로젝트를 진행합니다.<br />
+                    그리고, 머리가 아플때는<br />
+                    당근을 흔듭니다!<br />
+                    (🥕흔들흔들)
+                </span>
+            </div>
+            <form class="add_member">
+                <div id="name">
+                    <label for="inputName" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputName" placeholder="성함을 입력해주세요" />
+                </div>
+                <div id="blogUrl">
+                    <label for="inputEmail" class="form-label"></label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="블로그 URL을 입력해주세요" />
+                </div>
+                <div id="imageUrl">
+                    <label for="inputImage" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputImage" placeholder="프로필로 사용하실 이미지의 URL을 입력해주세요" />
+                </div>
+                <div id="hobby">
+                    <label for="inputHobby" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputHobby" placeholder="취미를 입력해주세요" />
+                </div>
+                <div id="determination">
+                    <label for="inputDetermination" class="form-label"></label>
+                    <input type="text" class="form-control" id="inputDetermination" placeholder="하고 싶은 한마디를 입력해주세요" />
+                </div>
+                <div id="add_btn">
+                    <button type="button" class="btn btn-dark" onclick="save_members()">
+                        멤버 추가
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="mycards">
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
-        </div>
-    </body>
+    </div>
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-4 g-4" id="cards-box"></div>
+    </div>
+</body>
+
 </html>
