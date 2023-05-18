@@ -62,9 +62,14 @@ def delete_member():
     return jsonify({'msg': '삭제 완료!'})
 
 
-@app.route('/subpage')
+@app.route('/siho')
 def member():
-    return render_template('subpage.html')
+    return render_template('siho.html')
+
+
+@app.route('/jaehyuck')
+def member2():
+    return render_template('jaehyuck.html')
 
 
 @app.route("/subpage/comment", methods=["GET"])
