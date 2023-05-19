@@ -175,13 +175,13 @@
                 });
         }
 
-        function deletemember(name) {
+        function deletemember(id) {
             fetch('/members/memberid', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name_give: name }),
+                body: JSON.stringify({ id_give: id }),
             })
                 .then((res) => res.json())
                 .then((data) => {
@@ -210,7 +210,7 @@
                                                     <div class="member-body">
                                                         <h5 class="member-name">${name}</h5>
                                                         <button
-                                                            onclick="deletemember('${name}')"
+                                                            onclick="deletemember(${id})"
                                                             type="button"
                                                             class="btn btn-dark"
                                                         >

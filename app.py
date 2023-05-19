@@ -16,8 +16,6 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
-# id 구현함
-
 
 @app.route("/members", methods=["POST"])
 def members_post():
@@ -60,8 +58,8 @@ def member_get():
 @app.route('/members/memberid', methods=['DELETE'])
 def delete_member():
     data = request.json
-    name_receive = data['name_give']
-    db.members.delete_one({'name': name_receive})
+    id_receive = data['id_give']
+    db.members.delete_one({'member_id': id_receive})
     return jsonify({'msg': '삭제 완료!'})
 
 
@@ -70,8 +68,6 @@ def comments_show(id):
     all_commnets = list(db.comments.find(
         {'memberid': id}, {'_id': False}).sort('_id', -1))
     return jsonify({'result': all_commnets})
-
-# id구현함
 
 
 @app.route("/members/<id>/comments", methods=["POST"])
