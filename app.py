@@ -7,7 +7,8 @@ app = Flask(__name__)
 ca = certifi.where()
 
 client = MongoClient(
-    'mongodb+srv://sparta:test@cluster0.1v14zkv.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
+    'mongodb+srv://sparta:test@cluster0.j8qe8ie.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
+
 db = client.dbsparta
 
 
@@ -43,7 +44,7 @@ def members_post():
         'image': image_receive,
         'selfintroduction': self_introduction_receive,
         'blog': blog_receive,
-        'comment': comment_receive,
+        'tmi': comment_receive,
         'hobby': hobby_receive
     }
     db.members.insert_one(doc)
@@ -97,11 +98,11 @@ def comments_post(id):
     return jsonify({'msg': '저장 완료!'})
 
 
-@app.route('/subpage/nicknameid', methods=['POST'])
-def delete_comment():
+@app.route('/members/<id>/comments/delete', methods=['DELETE'])
+def delete_comment(id):
     data = request.json
-    comments_receive = data['comment_give']
-    db.comments.delete_one({'nickname': comments_receive})
+    comments_receive = data['memberid_give']
+    db.comments.delete_one({'memberid': id})
     return jsonify({'msg': '삭제완료!'})
 
 
