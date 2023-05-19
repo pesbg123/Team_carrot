@@ -148,42 +148,6 @@
                                 alert(response['msg']);
                             },
                     });
-                    // fetch('/members')
-                    //     .then((res) => res.json())
-                    //     .then((data) => {
-                    //         let rows = data['result'];
-                    //         rows.forEach((a) => {
-                    //             let id = a['member_id'];
-                    //             let nickname = $('#nickname').val();
-                    //             let comment = $('#comment').val();
-                    //             if (!nickname && !comment) {
-                    //                 alert('닉네임과 댓글을 입력하시오.');
-                    //             } else if (!comment) {
-                    //                 alert('댓글을 입력하시오.');
-                    //             } else if (!nickname) {
-                    //                 alert('닉네임을 입력하시오.');
-                    //             } else {
-                    //                 let id_give = id;
-                    //                 $.ajax({
-                    //                     type: 'POST',
-                    //                     url: '/subpage/commentid',
-                    //                     data: {
-                    //                         id_give: id_give,
-                    //                         nickname_give: nickname,
-                    //                         comment_give: comment,
-                    //                     },
-                    //                     success: function (response) {
-                    //                         window.location.reload();
-                    //                         alert(response['msg']);
-                    //                     },
-                    //                 });
-                    //                 return false;
-                    //             }
-                    //         });
-                    //     })
-                    //     .catch((error) => {
-                    //         console.log(error);
-                    //     });
                 }
             }
 
@@ -243,6 +207,8 @@
                 <div class="team_comment">
                     <h1>Name : {{member.name}}</h1>
                     <br />
+                    <br />
+                    <p>self-introduction : {{member.selfintroduction}}</p>
                     <br />
                     <p>hobby : {{member.hobby}}</p>
                     <br />
