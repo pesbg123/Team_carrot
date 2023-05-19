@@ -16,8 +16,6 @@ db = client.dbsparta
 def home():
     return render_template('index.html')
 
-# id 구현함
-
 
 @app.route("/members", methods=["POST"])
 def members_post():
@@ -70,8 +68,6 @@ def comments_show(id):
     all_commnets = list(db.comments.find(
         {'memberid': id}, {'_id': False}).sort('_id', -1))
     return jsonify({'result': all_commnets})
-
-# id구현함
 
 
 @app.route("/members/<id>/comments", methods=["POST"])
