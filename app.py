@@ -23,6 +23,7 @@ def members_post():
     name_receive = request.form['name_give']
     image_receive = request.form['image_give']
     blog_receive = request.form['blog_give']
+    self_introduction_receive = request.form['selfintroduction_give']
     comment_receive = request.form['comment_give']
     hobby_receive = request.form['hobby_give']
 
@@ -40,6 +41,7 @@ def members_post():
         'member_id': id,
         'name': name_receive,
         'image': image_receive,
+        'selfintroduction': self_introduction_receive,
         'blog': blog_receive,
         'comment': comment_receive,
         'hobby': hobby_receive

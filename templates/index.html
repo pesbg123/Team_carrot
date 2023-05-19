@@ -172,12 +172,14 @@
                 let image = $('#inputImage').val();
                 let blog = $('#inputEmail').val();
                 let comment = $('#inputDetermination').val();
+                let self_introduction = $('#inputself').val();
                 let hobby = $('#inputHobby').val();
                 let formData = new FormData();
                 formData.append('name_give', name);
                 formData.append('image_give', image);
                 formData.append('blog_give', blog);
                 formData.append('comment_give', comment);
+                formData.append('selfintroduction_give', self_introduction);
                 formData.append('hobby_give', hobby);
 
                 fetch('/members', { method: 'POST', body: formData })
@@ -295,6 +297,15 @@
                             class="form-control"
                             id="inputImage"
                             placeholder="프로필로 사용하실 이미지의 URL을 입력해주세요"
+                        />
+                    </div>
+                    <div id="self_introduction">
+                        <label for="inputself" class="form-label"></label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="inputself"
+                            placeholder="간단한 자기소개를 입력해주세요"
                         />
                     </div>
                     <div id="hobby">
