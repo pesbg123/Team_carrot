@@ -175,6 +175,21 @@
                 });
         }
 
+        function delete_comment(id) {
+            fetch(`/members/${id}/comments/delete`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ memberid_give: id }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    alert(data['msg']);
+                    window.location.reload();
+                });
+        }
+
         function deletemember(id) {
             fetch('/members/memberid', {
                 method: 'DELETE',
@@ -185,6 +200,7 @@
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    delete_comment(id)
                     alert(data['msg']);
                     window.location.reload();
                 });
