@@ -7,7 +7,7 @@ app = Flask(__name__)
 ca = certifi.where()
 
 client = MongoClient(
-    'mongodb+srv://sparta:test@cluster0.j8qe8ie.mongodb.net/?retryWrites=true&w=majority', tlsCAFile=ca)
+    '', tlsCAFile=ca)
 
 db = client.dbsparta
 
