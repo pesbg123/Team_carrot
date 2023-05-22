@@ -105,9 +105,7 @@ def delete_comment(id):
 @app.route('/members/<id>')
 def render_teammember(id):
     _id = int(id)
-    print(_id)
     member = db.members.find_one({'member_id': _id})
-    print(member)
     return render_template('member.html', member=member)
 
 
